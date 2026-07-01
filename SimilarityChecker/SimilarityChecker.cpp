@@ -18,14 +18,16 @@ public:
 	{
 		vector<char> alphabet1, alphabet2;
 		int sameAlphabetCount = 0;
+		
 		for (char alpha : str1)
 		{
 			if(find(alphabet1.begin(), alphabet1.end(), alpha) == alphabet1.end())
 				alphabet1.push_back(alpha);
 		}
+		int str1AlphabetCount = alphabet1.size();
 		for (char alpha : str2)
 		{
-			if (find(alphabet1.begin(), alphabet1.end(), alpha) == alphabet1.end())
+			if (find(alphabet1.begin(), alphabet1.begin()+str1AlphabetCount, alpha) == alphabet1.begin() + str1AlphabetCount)
 				alphabet1.push_back(alpha);
 			else
 				sameAlphabetCount++;
