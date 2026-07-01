@@ -2,31 +2,27 @@
 #include "gmock/gmock.h"
 using namespace testing;
 
-TEST(SimilarityCheckerTest, Test1)
-{
-	SimilarityChecker checker;
-	int result = checker.runChecker("ASD", "DSA");
-	int expected = 60;
+class SimilarityCheckerFixture : public Test {
+public:
+	void checker(int expected, string statement1, string statement2) {
+		SimilarityChecker checker;
+		EXPECT_EQ(expected, checker.runChecker(statement1, statement2));
+	}
+};
 
-	EXPECT_EQ(expected, result);
+TEST_F(SimilarityCheckerFixture, Test1)
+{
+	checker(60, "ASD", "DSA");
 }
 
-TEST(SimilarityCheckerTest, Test2)
+TEST_F(SimilarityCheckerFixture, Test2)
 {
-	SimilarityChecker checker;
-	int result = checker.runChecker("A", "BB");
-	int expected = 00;
-
-	EXPECT_EQ(expected, result);
+	checker(0, "A", "BB");
 }
 
-TEST(SimilarityCheckerTest, Test3)
+TEST_F(SimilarityCheckerFixture, Test3)
 {
-	SimilarityChecker checker;
-	int result = checker.runChecker("AAABB", "BAA");
-	int expected = 20;
-
-	EXPECT_EQ(expected, result);
+	checker(20, "AAABB", "BAA");
 }
 
 
